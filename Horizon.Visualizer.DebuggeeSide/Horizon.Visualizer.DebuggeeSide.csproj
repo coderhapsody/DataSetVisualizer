@@ -2,10 +2,14 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netcoreapp3.0</TargetFrameworks>
-    <AssemblyName>DebuggeeSide</AssemblyName>
+    <AssemblyName>Horizon.Visualizer.DebuggeeSide</AssemblyName>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Horizon.Visualizer.UI\Allegro.Visualizer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.DebuggerVisualizers" Version="17.0.2042701" />
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers">
