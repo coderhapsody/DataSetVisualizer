@@ -1,23 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using Allegro.Visualizer.NetCore.DebuggeeSide;
 using Horizon.Visualizer.UI;
 using Microsoft.VisualStudio.DebuggerVisualizers;
 
 
 [assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(VisualizerObjectSource), Target = typeof(DataSet), Description = "Horizon DataSet Visualizer")]
 [assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(VisualizerObjectSource), Target = typeof(DataTable), Description = "Horizon DataTable Visualizer")]
-//[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), "Allegro.Visualizer.NetCore.DebuggeeSide.DataRowVisualizerObjectSource, DebuggeeSide, Version=1.0.0.0, Culture=neutral, PublicKeyToken=eb16873a49ad7145", Target = typeof(DataRow), Description = "Horizon (.NET Core) DataRow Visualizer")]
+[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(DataRowVisualizerObjectSource), Target = typeof(DataRow), Description = "Horizon DataRow Visualizer")]
+[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(DataRowVisualizerObjectSource), Target = typeof(DataRowCollection), Description = "Horizon DataRowCollection Visualizer")]
+[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(DataRowVisualizerObjectSource), Target = typeof(DataView), Description = "Horizon DataView Visualizer")]
+[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(DataRowVisualizerObjectSource), Target = typeof(DataRowView), Description = "Horizon DataRowView Visualizer")]
+[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(ListVisualizerObjectSource), Target = typeof(List<>), Description = "Horizon List Visualizer")]
 namespace Horizon.Visualizer.UI
 {
     internal class CustomSerializationBinder : SerializationBinder
     {
         public override Type BindToType(string assemblyName, string typeName)
         {
-            if(assemblyName.Contains("Schema") || typeName.EndsWith("DS", StringComparison.OrdinalIgnoreCase))
+            if (assemblyName.Contains("Schema") || typeName.EndsWith("DS", StringComparison.OrdinalIgnoreCase) || (typeName.ToLower().Contains("allegro") && typeName.ToLower().Contains("schema")))
                 return typeof(DataSet);
             return Type.GetType(string.Format("{0}, {1}", typeName, assemblyName));
         }
