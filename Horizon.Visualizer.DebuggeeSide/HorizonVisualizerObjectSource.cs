@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
 using Microsoft.VisualStudio.DebuggerVisualizers;
@@ -105,10 +107,28 @@ namespace Allegro.Visualizer.NetCore.DebuggeeSide
                 }
                 else if (target is IList list)
                 {
-                    var serializableModel = new SerializableModel(list);
-                    StreamSerializer.ObjectToStream(outgoingData, serializableModel);
+                    var table = ToDataTable(list);
+                    StreamSerializer.ObjectToStream(outgoingData, table);
                 }
             }
+        }
+
+        public DataTable ToDataTable(IList data)
+        {
+            Type type = data.GetType().GenericTypeArguments[0];
+            PropertyDescriptorCollection properties =
+                TypeDescriptor.GetProperties(type);
+            DataTable table = new DataTable();
+            foreach (PropertyDescriptor prop in properties)
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            foreach (var item in data)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                table.Rows.Add(row);
+            }
+            return table;
         }
     }
 }
