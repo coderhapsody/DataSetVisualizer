@@ -164,8 +164,8 @@ namespace Horizon.Visualizer.UI
         private void VisualizerForm_Load(object sender, EventArgs e)
         {
             dgvGrid.DataError += (senderObject, errorEventArgs) => { };
-            splitContainer1.Panel1Collapsed = true;
-            splitContainer1.Panel1.Hide();
+            //splitContainer1.Panel1Collapsed = true;
+            //splitContainer1.Panel1.Hide();
         }
 
         private void VisualizerForm_KeyDown(object sender, KeyEventArgs e)

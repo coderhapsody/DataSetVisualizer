@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
@@ -10,13 +11,13 @@ using Horizon.Visualizer.UI;
 using Microsoft.VisualStudio.DebuggerVisualizers;
 
 
-[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(VisualizerObjectSource), Target = typeof(DataSet), Description = "Horizon DataSet Visualizer")]
-[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(VisualizerObjectSource), Target = typeof(DataTable), Description = "Horizon DataTable Visualizer")]
-[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(DataRowVisualizerObjectSource), Target = typeof(DataRow), Description = "Horizon DataRow Visualizer")]
-[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(DataRowVisualizerObjectSource), Target = typeof(DataRowCollection), Description = "Horizon DataRowCollection Visualizer")]
-[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(DataRowVisualizerObjectSource), Target = typeof(DataView), Description = "Horizon DataView Visualizer")]
-[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(DataRowVisualizerObjectSource), Target = typeof(DataRowView), Description = "Horizon DataRowView Visualizer")]
-[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(ListVisualizerObjectSource), Target = typeof(List<>), Description = "Horizon List Visualizer")]
+[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(HorizonVisualizerObjectSource), Target = typeof(DataSet), Description = "Horizon DataSet Visualizer")]
+[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(HorizonVisualizerObjectSource), Target = typeof(DataTable), Description = "Horizon DataTable Visualizer")]
+[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(HorizonVisualizerObjectSource), Target = typeof(DataRow), Description = "Horizon DataRow Visualizer")]
+[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(HorizonVisualizerObjectSource), Target = typeof(DataRowCollection), Description = "Horizon DataRowCollection Visualizer")]
+[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(HorizonVisualizerObjectSource), Target = typeof(DataView), Description = "Horizon DataView Visualizer")]
+[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(HorizonVisualizerObjectSource), Target = typeof(DataRowView), Description = "Horizon DataRowView Visualizer")]
+[assembly: DebuggerVisualizer(typeof(DataSetDebuggerSide), typeof(HorizonVisualizerObjectSource), Target = typeof(IEnumerable<>), Description = "Horizon IEnumerable Visualizer")]
 namespace Horizon.Visualizer.UI
 {
     internal class CustomSerializationBinder : SerializationBinder
@@ -57,6 +58,8 @@ namespace Horizon.Visualizer.UI
             }
             return obj;
         }
+
+        
 
         protected override void Show(IDialogVisualizerService windowService, IVisualizerObjectProvider objectProvider)
         {

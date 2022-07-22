@@ -1,10 +1,11 @@
-﻿using System.Data;
+﻿using System.Collections;
+using System.Data;
 using System.IO;
 using Microsoft.VisualStudio.DebuggerVisualizers;
 
 namespace Allegro.Visualizer.NetCore.DebuggeeSide
 {
-    public class DataRowVisualizerObjectSource : VisualizerObjectSource
+    public class HorizonVisualizerObjectSource : VisualizerObjectSource
     {
         public override void GetData(object target, Stream outgoingData)
         {
@@ -78,6 +79,31 @@ namespace Allegro.Visualizer.NetCore.DebuggeeSide
                     }
 
                     StreamSerializer.ObjectToStream(outgoingData, table);
+                }
+                else if (target is DataTable dataTable)
+                {
+                    dataTable.Constraints.Clear();
+                    StreamSerializer.ObjectToStream(outgoingData, dataTable);
+                }
+                else if (target is DataSet dataSet)
+                {
+                    dataSet.EnforceConstraints = false;
+                    StreamSerializer.ObjectToStream(outgoingData, dataSet);
+                }
+                else if (target is DataRow[] rows)
+                {
+                    DataTable dt = rows[0].Table.Clone();
+                    foreach (DataRow dr in rows)
+                    {
+                        dt.ImportRow(dr);
+                    }
+                    dt.AcceptChanges();
+                    StreamSerializer.ObjectToStream(outgoingData, dt);
+                }
+                else if (target is IList list)
+                {
+                    var serializableModel = new SerializableModel(list);
+                    StreamSerializer.ObjectToStream(outgoingData, serializableModel);
                 }
             }
         }

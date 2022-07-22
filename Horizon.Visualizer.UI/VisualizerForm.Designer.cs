@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisualizerForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnReload = new System.Windows.Forms.Button();
             this.cbAutoApply = new System.Windows.Forms.CheckBox();
@@ -82,7 +83,7 @@
             this.cbAutoApply.Location = new System.Drawing.Point(351, 11);
             this.cbAutoApply.Margin = new System.Windows.Forms.Padding(4);
             this.cbAutoApply.Name = "cbAutoApply";
-            this.cbAutoApply.Size = new System.Drawing.Size(98, 21);
+            this.cbAutoApply.Size = new System.Drawing.Size(94, 20);
             this.cbAutoApply.TabIndex = 5;
             this.cbAutoApply.Text = "A&uto Apply";
             this.cbAutoApply.UseVisualStyleBackColor = true;
@@ -90,7 +91,7 @@
             // 
             // tbFilter
             // 
-            this.tbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbFilter.Location = new System.Drawing.Point(646, 10);
             this.tbFilter.Margin = new System.Windows.Forms.Padding(4);
@@ -116,7 +117,7 @@
             this.label2.Location = new System.Drawing.Point(595, 13);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 17);
+            this.label2.Size = new System.Drawing.Size(39, 16);
             this.label2.TabIndex = 2;
             this.label2.Text = "Filter:";
             // 
@@ -125,7 +126,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 17);
+            this.label1.Size = new System.Drawing.Size(75, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "Data Table";
             // 
@@ -159,8 +160,8 @@
             // 
             // propGrid
             // 
-            this.propGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.propGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.propGrid.HelpVisible = false;
             this.propGrid.Location = new System.Drawing.Point(0, 0);
@@ -194,6 +195,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "VisualizerForm";
