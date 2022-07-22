@@ -28,7 +28,7 @@ namespace Allegro.Visualizer.NetCore.DebuggeeSide
                     {
                         table = row.Table.Clone();
                     }
-
+                    table.Constraints.Clear();
                     table.LoadDataRow(row.ItemArray, true);
 
                     StreamSerializer.ObjectToStream(outgoingData, table);
@@ -36,6 +36,7 @@ namespace Allegro.Visualizer.NetCore.DebuggeeSide
                 else if (target is DataView view)
                 {
                     DataTable table = view.Table.Clone();
+                    table.Constraints.Clear();
 
                     foreach (DataRow dataRow in view.Table.Rows)
                     {
@@ -47,7 +48,7 @@ namespace Allegro.Visualizer.NetCore.DebuggeeSide
                 else if (target is DataRowView dataRowView)
                 {
                     DataTable table = dataRowView.Row.Table.Clone();
-
+                    table.Constraints.Clear();
                     table.LoadDataRow(dataRowView.Row.ItemArray, true);
 
                     StreamSerializer.ObjectToStream(outgoingData, table);
@@ -71,6 +72,7 @@ namespace Allegro.Visualizer.NetCore.DebuggeeSide
                         {
                             table = dataRowCollection[0].Table.Clone();
                         }
+                        table.Constraints.Clear();
 
                         foreach (DataRow dataRow in dataRowCollection)
                         {
@@ -93,6 +95,7 @@ namespace Allegro.Visualizer.NetCore.DebuggeeSide
                 else if (target is DataRow[] rows)
                 {
                     DataTable dt = rows[0].Table.Clone();
+                    dt.Constraints.Clear();
                     foreach (DataRow dr in rows)
                     {
                         dt.ImportRow(dr);
